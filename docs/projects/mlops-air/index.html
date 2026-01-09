@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pipeline MLOps — Monitoring et Prédiction de la Qualité de l'Air</title>
+  <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER PROFIL -->
+    <header class="profile-header">
+      <img src="/images/profil.jpg" alt="Mouhamadou SECK" class="profile-img">
+
+      <div class="profile-text">
+        <h1>Mouhamadou SECK</h1>
+        <p class="role">Data Scientist | AI Engineer | MLOps</p>
+        <p class="location">Marseille, France</p>
+        <p class="status">En recherche active</p>
+
+        <div class="header-links">
+          <a href="/contact/">Contact</a>
+          <a href="https://www.linkedin.com/in/mouhamadou-seck-7276111b7/" target="_blank">LinkedIn</a>
+          <a href="https://github.com/ahmadoubseck" target="_blank">GitHub</a>
+          <a href="/pdf/CV_Mouhamadou_SECK_Data_IA.pdf" target="_blank" class="btn-code">📄 CV</a>
+          <a href="/pdf/recommandation_Mouhamadou_SECK.pdf" target="_blank" class="btn-code">📄 Lettre de rcommandation</a>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENU -->
+    <main class="content">
+      <div><h1>Pipeline MLOps — Monitoring et Prédiction de la Qualité de l'Air</h1><p><b>Conception et déploiement d’une architecture MLOps complète</b> pour le monitoring environnemental automatisé : de l’ingestion de données temps réel via API jusqu’au déploiement d’une interface de simulation interactive.</p><blockquote>🚀 <b>Impact :</b> Transformation d’un modèle exploratoire en un <b>service de prédiction opérationnel</b>, automatisé et reproductible, exploitant des flux de données environnementales en continu.</blockquote><p><div class="project-hero">
+  <img src="/images/marseille.png" alt="Dashboard Qualité de l'Air" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+  <p class="image-caption" style="text-align:center; font-style:italic; color:#888; margin-top:10px;">
+    <strong>Interface interactive :</strong> Simulation de l'indice AQI à partir des données environnementales de Marseille.
+  </p>
+</div></p><h2>🌍 CONTEXTE & ENJEUX</h2><p>La pollution atmosphérique constitue un enjeu sanitaire majeur, nécessitant des outils capables de surveiller, anticiper et interpréter les variations des polluants atmosphériques.</p><p>Ce projet vise à <b>industrialiser la prédiction de l’indice de qualité de l’air (AQI)</b> à partir de données environnementales réelles, en combinant data engineering, machine learning et bonnes pratiques MLOps.</p><h3>Objectifs du projet :</h3><ul><li><b>Automatisation</b> : Suppression de toute intervention manuelle dans la collecte, le traitement et l’entraînement.</li><li><b>Fiabilité</b> : Garantir des prédictions stables et généralisables malgré la saisonnalité.</li><li><b>Vulgarisation</b> : Rendre la donnée exploitable via un dashboard d’aide à la décision.</li></ul><h2>🛠️ ARCHITECTURE DU PIPELINE (ML LIFE CYCLE)</h2><p>Le défi principal résidait dans l’automatisation complète du cycle de vie du modèle.</p><h3>1. Ingestion Automatisée (Data Engineering)</h3><ul><li>Développement de scripts Python interrogeant l’API publique <a href="https://aqicn.org">aqicn.org</a>.</li><li>Nettoyage, normalisation et historisation des données de pollution et de météo.</li><li>Séparation claire entre données brutes, features transformées et données prêtes à l’entraînement.</li></ul><h3>2. Entraînement & Optimisation (Machine Learning)</h3><ul><li><b>Modèle</b> : Utilisation de <b>XGBoost Regressor</b>, adapté aux relations non linéaires entre polluants et variables météorologiques.</li></ul><ul><li><b>Feature engineering</b> :</li></ul><ul><li>Polluants : PM₁₀, PM₂.₅, NO₂, O₃, SO₂, CO</li></ul><ul><li>Variables météo : température, humidité, pression, vent</li></ul><ul><li><b>Évaluation</b> : Découpage <b>train / test</b> afin de contrôler la généralisation et limiter le surapprentissage.</li></ul><h3>3. CI/CD & Déploiement (Approche MLOps)</h3><ul><li><b>GitLab CI/CD</b> :</li></ul><ul><li>Validation du pipeline</li></ul><ul><li>Entraînement automatisé du modèle</li></ul><ul><li>Versioning et sauvegarde des artefacts (<code>.pkl</code>)</li></ul><ul><li><b>Serving</b> :</li></ul><ul><li>Application interactive développée avec <b>Streamlit</b></li></ul><ul><li>Déploiement continu sur <b>Streamlit Cloud</b></li></ul><h2>📊 SIMULATION & LOGIQUE DU MODÈLE</h2><p>L’utilisateur peut manipuler les concentrations de polluants et les paramètres météorologiques afin d’observer leur impact immédiat sur l’indice de qualité de l’air.</p><p><div class="code-block">
+<pre><code>
+from sklearn.model_selection import train_test_split
+import xgboost as xgb</p><p>X<i>train, X</i>test, y<i>train, y</i>test = train<i>test</i>split(
+    X, y, test<i>size=0.2, random</i>state=42
+)</p><p>model = xgb.XGBRegressor(
+    n<i>estimators=200,
+    learning</i>rate=0.05,
+    max<i>depth=5,
+    subsample=0.8,
+    colsample</i>bytree=0.8,
+    objective="reg:squarederror"
+)</p><p>model.fit(X<i>train, y</i>train)
+</code></pre>
+</div></p><h2>📊 Fonctionnalités & Simulation</h2><p>L’interface permet de tester différents scénarios environnementaux et d’en analyser l’impact :</p><ul><li><b>Variables polluantes</b> : Ajustement des taux de $NO<i>2$, $O</i>3$, $PM<i>{10}$ et $PM</i>{2.5}$.</li></ul><ul><li><b>Variables météorologiques</b> : Température, humidité, vitesse du vent.</li></ul><p>- <b>Interprétation métier</b> : Mapping automatique vers des catégories de qualité de l’air compréhensibles
+  ("Bon", "Modéré", "Dégradé").</p><h2>📉 RÉSULTATS & TAKEAWAYS</h2><ul><li>⚡ Pipeline opérationnel et reproductible : ingestion, entraînement et prédiction automatisés.</li><li>📊 Évaluation maîtrisée : performances cohérentes entre jeux d’entraînement et de test.</li><li>🛠️ Architecture scalable : conçue pour être étendue à d’autres villes ou sources de données.</li></ul><h2>Stack Technique</h2><p><div class="tech-stack">
+  <span class="badge">Python</span>
+  <span class="badge">Pandas</span>
+  <span class="badge">Scikit-learn</span>
+  <span class="badge">XGBoost</span>
+  <span class="badge">MLOps</span>
+  <span class="badge">GitLab CI/CD</span>
+  <span class="badge">Streamlit</span>
+</div></p><p><div class="project-links" style="margin-top: 20px;">
+  <a href="https://gz9q26ekxwcfae7y7oymfg.streamlit.app/" target="_blank" class="btn-code">
+    🌐 Accéder à l'application en direct
+  </a>
+</div></p></div>
+    </main>
+
+  </div>
+</body>
+</html>
