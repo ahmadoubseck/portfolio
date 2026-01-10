@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Index</title>
+  <link rel="stylesheet" href="/portfolio/index.css">
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER PROFIL -->
+    <header class="profile-header">
+      <img src="/portfolio/images/profil.jpg" alt="Mouhamadou SECK" class="profile-img">
+
+      <div class="profile-text">
+        <h1>Mouhamadou SECK</h1>
+        <p class="role">Data Scientist | AI Engineer | MLOps</p>
+        <p class="location">Marseille, France</p>
+        <p class="status">En recherche active</p>
+
+        <div class="header-links">
+          <a href="/portfolio/contact/">Contact</a>
+          <a href="https://www.linkedin.com/in/mouhamadou-seck-7276111b7/" target="_blank">LinkedIn</a>
+          <a href="https://github.com/ahmadoubseck" target="_blank">GitHub</a>
+          <a href="/portfolio/pdf/CV_Mouhamadou_SECK_Data_IA.pdf" target="_blank" class="btn-code">📄 CV</a>
+          <a href="/portfolio/pdf/recommandation_Mouhamadou_SECK.pdf" target="_blank" class="btn-code">📄 Lettre de rcommandation</a>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENU -->
+    <main class="content">
+      <div><h2>Prédiction de l’Évolution de Fluides Turbulents par Deep Learning (ConvLSTM2D)</h2><p>Accélération <b>data-driven</b> de simulations physiques haute fidélité grâce à des modèles
+<b>spatio-temporels profonds</b>, avec déploiement sur infrastructures <b>HPC</b>.</p><blockquote>🎯 Objectif : réduire drastiquement le coût de calcul tout en conservant la cohérence physique et statistique des écoulements turbulents.</blockquote><p><div class="project-hero" style="text-align: center; margin-bottom: 30px;">
+  <img src="/portfolio/images/simulation_vortex.gif"
+       alt="Simulation de vorticité" 
+       style="width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
+  <p class="image-caption" style="font-style: italic; color: #888; margin-top: 10px;">
+    <strong>Animation :</strong> Évolution temporelle d’un champ de vorticité prédite par un modèle ConvLSTM2D,
+    entraîné sur données DNS haute résolution.
+  </p>
+</div></p><h2>Contexte Scientifique & Industriel</h2><p>La <b>simulation numérique directe (DNS)</b> de la turbulence est un pilier de nombreux secteurs :</p><ul><li>mécanique des fluides</li><li>aéronautique & spatial</li><li>énergie & combustion</li><li>météorologie & climat</li></ul><p>Cependant, ces simulations sont <b>extrêmement coûteuses</b> :</p><ul><li>temps de calcul élevé</li><li>dépendance à des supercalculateurs</li><li>faible itérabilité pour l’ingénierie</li></ul><blockquote>👉 Une seule simulation DNS peut nécessiter <b>plusieurs jours de calcul</b> sur cluster HPC.</blockquote><h2>Problématique de Recherche</h2><p><b>Comment prédire l’évolution temporelle d’un écoulement turbulent sans résoudre explicitement
+les équations physiques à chaque pas de temps ?</b></p><h3>Approche adoptée</h3><p>- Hypothèse clé :  
+  Les champs de vorticité contiennent des <b>structures spatio-temporelles apprenables</b></p><ul><li>Stratégie :</li></ul><ul><li>apprendre sur données DNS</li></ul><ul><li>préserver les statistiques globales</li></ul><ul><li>accélérer l’inférence de plusieurs ordres de grandeur</li></ul><h2>Environnement de Calcul Haute Performance (HPC)</h2><p>Le projet a été mené dans un cadre <b>recherche appliquée</b>, sur les infrastructures du
+<b>Mésocentre d’Aix-Marseille</b> :</p><ul><li><b>Plateforme</b> : HPC Aix-Marseille Université</li><li><b>Accélération</b> : nœuds GPU</li><li><b>Données</b> : champs de vorticité DNS haute résolution</li><li><b>Dimensionnalité</b> : données 4D (temps + espace)</li></ul><p>👉 Travail réalisé dans des conditions proches de l’industrie (volumes, contraintes, reproductibilité).</p><h2>Architecture du Modèle Spatio-Temporel (ConvLSTM2D)</h2><p>Le cœur du système repose sur des <b>cellules ConvLSTM2D</b>, combinant :</p><ul><li>🧠 <b>Mémoire temporelle</b> (LSTM)</li><li>🌀 <b>Extraction spatiale locale</b> (convolutions)</li></ul><p>Cette architecture permet de capturer :</p><ul><li>la morphologie des tourbillons</li></ul><ul><li>leur dynamique non linéaire</li></ul><ul><li>les corrélations spatio-temporelles longues</li></ul><p><div class="code-block">
+<pre><code></p><p><b>## dataset.py — Chargement et préparation des données DNS</b></p><p>import numpy as np</p><p>def load_dns_data(path, sequence_length=5):
+    """
+    Charge les champs de vorticité DNS et crée des séquences temporelles
+    pour l'entraînement ConvLSTM.</p><p>Shape attendue : (T, H, W)
+    Shape sortie X : (N, sequence_length, H, W, 1)
+    Shape sortie y : (N, H, W, 1)
+    """</p><p>data = np.load(path)                  # (T, H, W)
+    data = data[..., np.newaxis]          # (T, H, W, 1)</p><p>X, y = [], []
+    for i in range(len(data) - sequence_length):
+        X.append(data[i:i + sequence_length])
+        y.append(data[i + sequence_length])</p><p>return np.array(X), np.array(y)</p><p><b>## model.py — Architecture ConvLSTM2D spatio-temporelle</b></p><p>from tensorflow.keras.models import Model
+from tensorflow.keras.layers import (
+    Input, ConvLSTM2D, Conv2D,
+    LayerNormalization, Dropout
+)</p><p>def build_convlstm_model(input_shape):
+    """
+    Modèle ConvLSTM2D pour la prédiction de champs de vorticité
+    """</p><p>inputs = Input(shape=input_shape)</p><p>x = ConvLSTM2D(
+        filters=256,
+        kernel<i>size=(3, 3),
+        padding="same",
+        return</i>sequences=False
+    )(inputs)</p><p>x = LayerNormalization()(x)</p><p>x = Conv2D(
+        filters=8,
+        kernel_size=(3, 3),
+        activation="relu",
+        padding="same"
+    )(x)</p><p>x = Dropout(0.2)(x)</p><p>outputs = Conv2D(
+        filters=1,
+        kernel_size=(3, 3),
+        activation="linear",
+        padding="same"
+    )(x)</p><p>return Model(inputs, outputs)</p><p><b>## train.py — Entraînement du modèle sur infrastructure HPC</b></p><p>import tensorflow as tf
+from dataset import load<i>dns</i>data
+from model import build<i>convlstm</i>model</p><p>DATA<i>PATH = "../data/vorticity</i>dns.npy"
+SEQUENCE<i>LENGTH = 5
+BATCH</i>SIZE = 1
+EPOCHS = 30</p><p><b>## Chargement des données</b></p><p>X, y = load<i>dns</i>data(DATA<i>PATH, SEQUENCE</i>LENGTH)</p><p><b>## Construction du modèle</b></p><p>model = build<i>convlstm</i>model(
+    input<i>shape=(SEQUENCE</i>LENGTH, 512, 512, 1)
+)</p><p>model.compile(
+    optimizer=tf.keras.optimizers.Adam(1e-4),
+    loss="mse"
+)</p><p>model.summary()</p><p><b>## Entraînement</b></p><p>model.fit(
+    X, y,
+    validation_split=0.1,
+    epochs=EPOCHS,
+    batch_size=BATCH_SIZE
+)</p><p>model.save("multi<i>weights</i>full.hdf5")</p><p><b>## predict.py — Prédiction auto-régressive à horizon étendu</b></p><p>import numpy as np
+import tensorflow as tf</p><p>MODEL_PATH = "multi_weights_full.hdf5"
+DATA_PATH = "../data/vorticity_dns.npy"
+SEQUENCE_LENGTH = 5
+N_PRED = 10</p><p>model = tf.keras.models.load<i>model(MODEL</i>PATH)</p><p>data = np.load(DATA_PATH)[..., np.newaxis]</p><p>sequence = data[:SEQUENCE_LENGTH]
+predictions = []</p><p>for <i> in range(N</i>PRED):
+    pred = model.predict(sequence[np.newaxis])
+    predictions.append(pred[0])
+    sequence = np.concatenate([sequence[1:], pred], axis=0)</p><p>predictions = np.array(predictions)
+np.save("predicted_vorticity.npy", predictions)</p><p><b>## script.slurm — Exécution sur cluster HPC (SLURM)</b></p><p>#!/bin/bash
+#SBATCH --job-name=LSTM
+#SBATCH --partition=skylake
+#SBATCH --nodes=3
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --output=%x.%j.out
+#SBATCH --error=%x.%j.err</p><p>module load userspace/all
+source ~/.bashrc</p><p>python train.py
+</code></pre>
+</div></p><h2>Analyse des Performances</h2><p>L’évaluation ne se limite pas à une simple loss :</p><ul><li><b>Erreur de reconstruction</b></li><li><b>Stabilité temporelle</b></li><li><b>Cohérence des structures turbulentes</b></li><li><b>Comparaison statistique DNS vs prédiction</b></li></ul><p><div class="project-hero" style="text-align: center; margin-bottom: 30px;">
+  <img src="/portfolio/images/loss_vorticite.png" 
+       alt="Courbe de loss" 
+       style="width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
+  <p class="image-caption" style="font-style: italic; color: #888; margin-top: 10px;">
+    Évolution de la fonction de perte pendant l’entraînement.
+  </p>
+</div></p><p><div class="project-hero" style="text-align: center; margin-bottom: 30px;">
+  <img src="/portfolio/images/comparaison_dns.png"" 
+       alt="Comparaison DNS vs prédiction" 
+       style="width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
+  <p class="image-caption" style="font-style: italic; color: #888; margin-top: 10px;">
+    Comparaison visuelle entre la simulation DNS et la prédiction du modèle.
+  </p>
+</div></p><h2>Prédiction du Champ de Vorticité</h2><p><div class="project-hero" style="text-align: center; margin-bottom: 30px;">
+  <img src="/portfolio/images/predicted_vorticity3.png"" 
+       alt="Champ de vorticité prédit" 
+       style="width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
+  <p class="image-caption" style="font-style: italic; color: #888; margin-top: 10px;">
+    Champ de vorticité prédit par le modèle ConvLSTM2D à horizon temporel étendu.
+  </p>
+</div></p><h2>Résultats & Enseignements Clés</h2><p>- ⚡ <b>Accélération majeure</b>
+  → inférence jusqu’à <b>50× plus rapide</b> qu’une DNS classique</p><p>- 📈 <b>Fidélité statistique élevée</b>
+  → bonne conservation des distributions globales</p><p>- 🧠 <b>Apprentissage spatio-temporel robuste</b>
+  → capture des structures turbulentes dominantes</p><p>- ⚠️ <b>Limites identifiées</b>
+  → perte de précision sur les plus petites échelles (analyse critique assumée)</p><p>👉 Capacité démontrée à <b>analyser, quantifier et documenter les limites</b> du modèle.</p><h2>Perspectives de Recherche & Applications Industrielles</h2><p>Axes d’évolution explorables :</p><p>- <b>Physics-Informed Neural Networks (PINNs)</b>
+  → intégration explicite des équations de Navier–Stokes</p><p>- <b>Architectures avancées</b>
+  → GANs, Transformers spatio-temporels</p><p>- <b>Couplage IA + simulation</b>
+  → accélération de chaînes de calcul industrielles
+  (aéronautique, énergie, climat)</p><h2>Stack Technique</h2><p><div class="tech-stack">
+  <span class="badge">Deep Learning</span>
+  <span class="badge">ConvLSTM2D</span>
+  <span class="badge">TensorFlow / Keras</span>
+  <span class="badge">HPC (Mésocentre)</span>
+  <span class="badge">Python</span>
+</div></p></div>
+    </main>
+
+  </div>
+</body>
+</html>
