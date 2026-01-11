@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chatbot RAG Industriel — ArcelorMittal</title>
-  <link rel="stylesheet" href="/portfolio/index.css">
+  <link rel="stylesheet" href="../../index.css">
 </head>
 <body>
   <div class="wrapper">
 
     <!-- HEADER PROFIL -->
     <header class="profile-header">
-      <img src="/portfolio/images/profil.jpg" alt="Mouhamadou SECK" class="profile-img">
+      <img src="../../images/profil.jpg" alt="Mouhamadou SECK" class="profile-img">
 
       <div class="profile-text">
         <h1>Mouhamadou SECK</h1>
@@ -20,11 +20,11 @@
         <p class="status">En recherche active</p>
 
         <div class="header-links">
-          <a href="/portfolio/contact/">Contact</a>
+          <a href="../../contact/">Contact</a>
           <a href="https://www.linkedin.com/in/mouhamadou-seck-7276111b7/" target="_blank">LinkedIn</a>
           <a href="https://github.com/ahmadoubseck" target="_blank">GitHub</a>
-          <a href="/portfolio/pdf/CV_Mouhamadou_SECK_Data_IA.pdf" target="_blank" class="btn-code">📄 CV</a>
-          <a href="/portfolio/pdf/recommandation_Mouhamadou_SECK.pdf" target="_blank" class="btn-code">📄 Lettre de rcommandation</a>
+          <a href="../../pdf/CV_Mouhamadou_SECK_Data_IA.pdf" target="_blank" class="btn-code">📄 CV</a>
+          <a href="../../pdf/recommandation_Mouhamadou_SECK.pdf" target="_blank" class="btn-code">📄 Lettre de rcommandation</a>
 
         </div>
       </div>
@@ -33,73 +33,12 @@
     <!-- CONTENU -->
     <main class="content">
       <div><h1>Chatbot RAG Industriel — ArcelorMittal</h1><p><b>Système d’accès intelligent à la connaissance industrielle</b>, conçu et expérimenté en environnement <b>R&D</b>, basé sur une architecture avancée de <b>Retrieval-Augmented Generation (RAG)</b>.</p><blockquote>📍 <b>Contexte :</b> Projet déployé en milieu industriel réel, répondant à des contraintes strictes de performance, de fiabilité et de confidentialité des données.</blockquote><p><div class="project-hero">
-  <img src="/portfolio/images/photo_visite.jpg" alt="Site industriel ArcelorMittal" style="width:100%; border-radius:12px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+  <img src="../../images/photo_visite.jpg" alt="Site industriel ArcelorMittal" style="width:100%; border-radius:12px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
   <p class="image-caption" style="text-align:center; font-style:italic; color:#888; margin-top:10px;">
     Site industriel ArcelorMittal (Fos-sur-Mer)
   </p>
 </div></p><h2>🏭 CONTEXTE & ENJEUX MÉTIERS</h2><p>Au sein d'un complexe industriel international, l’accès rapide à la <b>connaissance critique</b> est freiné par la dispersion de l'information :</p><ul><li><b>Corpus hétérogène :</b> Milliers de documents (PDF techniques, procédures ISO, rapports R&D, scans).</li><li><b>Limites de la recherche classique :</b> La recherche par mots-clés échoue sur la sémantique et ne permet pas la synthèse.</li><li><b>Risque opérationnel :</b> Le temps perdu à chercher une information peut impacter la maintenance ou la sécurité.</li></ul><p>🎯 <b>L'Objectif :</b> Transformer ce corpus passif en un <b>agent conversationnel proactif</b>, capable de fournir des réponses fiables, sourcées et contextualisées.</p><h2>🛠️ ARCHITECTURE DU SYSTÈME</h2><p>Le projet repose sur une approche <b>Data-Centric</b>, où chaque étape du pipeline est optimisée pour minimiser le bruit :</p><h3>1. Ingestion & Traitement (Parsing Robuste)</h3><ul><li><b>Parsing avancé :</b> Utilisation de <code>PyMuPDF</code> et <code>Marker</code> pour extraire proprement le texte des documents industriels (tableaux, colonnes, métadonnées).</li><li><b>Chunking Dynamique :</b> Segmentation en fenêtres de <b>1000 tokens</b> avec un overlap de <b>50 tokens</b> pour préserver la continuité sémantique.</li></ul><h3>2. Retrieval (Recherche Vectorielle)</h3><ul><li><b>Embeddings :</b> Utilisation de modèles de pointe (<code>BGE-Large</code>, <code>E5</code>) optimisés pour le français et l'anglais technique.</li><li><b>Vector Index :</b> Indexation haute performance via <code>FAISS</code> ou <code>ChromaDB</code> (algorithme HNSW).</li></ul><h3>3. Generation (LLMs Maîtrisés)</h3><ul><li><b>Modèles Open-Source :</b> Déploiement local (<b>Mistral</b>, <b>Llama 3</b>, <b>DeepSeek</b>) via <code>Ollama</code> pour garantir la <b>confidentialité on-premise</b>.</li><li><b>Prompt Engineering :</b> Système de "System Prompt" strict pour limiter les réponses au seul contexte fourni (<b>Grounding</b>).</li></ul><p><div class="project-hero" style="text-align: center; margin-bottom: 30px;">
-  <img src="/portfolio/images/architect.png" 
-       alt="RAG Architect" 
-       style="width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
-  <p class="image-caption" style="font-style: italic; color: #888; margin-top: 10px;">
-    Architecture du système de Retrieval-Augmented Generation (RAG)
-  </p>
-</div></p><h2>🔬 L'INNOVATION : "OPTIRAG" (ANALYSE DE PERFORMANCE)</h2><p>Contrairement aux approches "boîte noire", une analyse systématique a été menée pour trouver le point d'équilibre du système :</p><ul><li><b>Analyse de sensibilité :</b> Étude de l'impact de la taille des chunks et du Top-K sur la précision.</li><li><b>Clustering de Performance :</b> Utilisation de <code>K-Means</code> pour identifier les configurations les plus stables et réduire les hallucinations.</li></ul><h3>Exemple : clustering des configurations RAG</h3><p><div class="code-block"></p><p><pre><code></p><p>from sklearn.cluster import KMeans</p><p>def optimize<i>rag(data):
-    kmeans = KMeans(n</i>clusters=3, random<i>state=42)
-    clusters = kmeans.fit</i>predict(data)
-    return clusters</p><p></code></pre></p><p></div></p><h3>Apports Méthodologiques</h3><p>🔬 Cette approche permet :</p><ul><li>d’identifier des <b>régimes de performance</b> stables du système RAG</li><li>de <b>réduire significativement les hallucinations</b> des LLMs</li><li>d’<b>objectiver les choix d’architecture</b> et d’hyperparamètres</li></ul><h2>🧭 Démarche de Travail</h2><ul><li>Approche incrémentale : tests contrôlés avant toute généralisation</li><li>Mesure systématique des effets (qualité, cohérence, stabilité)</li><li>Priorité à la robustesse plutôt qu’à la complexité inutile</li><li>Documentation et traçabilité des choix techniques</li></ul><h2>Résultats & Impact Métier</h2><ul><li>⚡ <b>Accès quasi instantané</b> à l’information critique</li><li>⏱️ <b>Réduction significative</b> du temps de recherche documentaire</li><li>🧠 <b>Amélioration de la cohérence et de la précision</b> des réponses générées</li><li>🔐 Architecture <b>compatible avec des contraintes industrielles</b> (on-premise, confidentialité)</li><li>♻️ Stack <b>100 % open-source</b>, industrialisable et maintenable</li></ul><h2>Stack Technique</h2><p><div class="tech-stack">
-  <span class="badge">RAG</span>
-  <span class="badge">LLMs Open-Source</span>
-  <span class="badge">PyMuPDF</span>
-  <span class="badge">Vector Search</span>
-  <span class="badge">Python</span>
-  <span class="badge">LangChain</span>
-</div></p></div>
-    </main>
-
-  </div>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chatbot RAG Industriel — ArcelorMittal</title>
-  <link rel="stylesheet" href="/portfolio/portfolio/static/index.css">
-</head>
-<body>
-  <div class="wrapper">
-
-    <header class="profile-header">
-      <img src="/portfolio/portfolio/static/images/profil.jpg" alt="Mouhamadou SECK" class="profile-img">
-
-      <div class="profile-text">
-        <h1>Mouhamadou SECK</h1>
-        <p class="role">Data Scientist | AI Engineer | MLOps</p>
-        <p class="location">Marseille, France</p>
-        <p class="status">En recherche active</p>
-
-        <div class="header-links">
-          <a href="/portfolio/portfolio/">Accueil</a>
-          <a href="/portfolio/portfolio/contact/">Contact</a>
-          <a href="https://www.linkedin.com/in/mouhamadou-seck-7276111b7/" target="_blank">LinkedIn</a>
-          <a href="https://github.com/ahmadoubseck" target="_blank">GitHub</a>
-          <a href="/portfolio/portfolio/static/pdf/CV_Mouhamadou_SECK_Data_IA.pdf" target="_blank" class="btn-code">📄 CV</a>
-          <a href="/portfolio/portfolio/static/pdf/recommandation_Mouhamadou_SECK.pdf" target="_blank" class="btn-code">📄 Lettre de recommandation</a>
-        </div>
-      </div>
-    </header>
-
-    <main class="content">
-      <div><h1>Chatbot RAG Industriel — ArcelorMittal</h1><p><b>Système d’accès intelligent à la connaissance industrielle</b>, conçu et expérimenté en environnement <b>R&D</b>, basé sur une architecture avancée de <b>Retrieval-Augmented Generation (RAG)</b>.</p><blockquote>📍 <b>Contexte :</b> Projet déployé en milieu industriel réel, répondant à des contraintes strictes de performance, de fiabilité et de confidentialité des données.</blockquote><p><div class="project-hero">
-  <img src="/portfolio/images/photo_visite.jpg" alt="Site industriel ArcelorMittal" style="width:100%; border-radius:12px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
-  <p class="image-caption" style="text-align:center; font-style:italic; color:#888; margin-top:10px;">
-    Site industriel ArcelorMittal (Fos-sur-Mer)
-  </p>
-</div></p><h2>🏭 CONTEXTE & ENJEUX MÉTIERS</h2><p>Au sein d'un complexe industriel international, l’accès rapide à la <b>connaissance critique</b> est freiné par la dispersion de l'information :</p><ul><li><b>Corpus hétérogène :</b> Milliers de documents (PDF techniques, procédures ISO, rapports R&D, scans).</li><li><b>Limites de la recherche classique :</b> La recherche par mots-clés échoue sur la sémantique et ne permet pas la synthèse.</li><li><b>Risque opérationnel :</b> Le temps perdu à chercher une information peut impacter la maintenance ou la sécurité.</li></ul><p>🎯 <b>L'Objectif :</b> Transformer ce corpus passif en un <b>agent conversationnel proactif</b>, capable de fournir des réponses fiables, sourcées et contextualisées.</p><h2>🛠️ ARCHITECTURE DU SYSTÈME</h2><p>Le projet repose sur une approche <b>Data-Centric</b>, où chaque étape du pipeline est optimisée pour minimiser le bruit :</p><h3>1. Ingestion & Traitement (Parsing Robuste)</h3><ul><li><b>Parsing avancé :</b> Utilisation de <code>PyMuPDF</code> et <code>Marker</code> pour extraire proprement le texte des documents industriels (tableaux, colonnes, métadonnées).</li><li><b>Chunking Dynamique :</b> Segmentation en fenêtres de <b>1000 tokens</b> avec un overlap de <b>50 tokens</b> pour préserver la continuité sémantique.</li></ul><h3>2. Retrieval (Recherche Vectorielle)</h3><ul><li><b>Embeddings :</b> Utilisation de modèles de pointe (<code>BGE-Large</code>, <code>E5</code>) optimisés pour le français et l'anglais technique.</li><li><b>Vector Index :</b> Indexation haute performance via <code>FAISS</code> ou <code>ChromaDB</code> (algorithme HNSW).</li></ul><h3>3. Generation (LLMs Maîtrisés)</h3><ul><li><b>Modèles Open-Source :</b> Déploiement local (<b>Mistral</b>, <b>Llama 3</b>, <b>DeepSeek</b>) via <code>Ollama</code> pour garantir la <b>confidentialité on-premise</b>.</li><li><b>Prompt Engineering :</b> Système de "System Prompt" strict pour limiter les réponses au seul contexte fourni (<b>Grounding</b>).</li></ul><p><div class="project-hero" style="text-align: center; margin-bottom: 30px;">
-  <img src="/portfolio/images/architect.png" 
+  <img src="../../images/architect.png" 
        alt="RAG Architect" 
        style="width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
   <p class="image-caption" style="font-style: italic; color: #888; margin-top: 10px;">
